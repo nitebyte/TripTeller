@@ -100,7 +100,7 @@ def txt_to_docx(txt_file, docx_file,town):
                 "prompt": imgprompt,
                 "n": 1,
                 "size": "1024x1024"
-            }
+            } 
 
             response = requests.post(url, headers=headers, data=json.dumps(data))
 
