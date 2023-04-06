@@ -92,7 +92,7 @@ def txt_to_docx(txt_file, docx_file,town):
             heading.alignment = WD_ALIGN_PARAGRAPH.CENTER
             headers = {
                 "Content-Type": "application/json",
-                "Authorization": f"Bearer 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"
+                "Authorization": f"Bearer API KEY HERE"
             }
             imgprompt = PR("I want you to write a DALL-E image generation prompt to generate an image related to " + title + " in the town of " + town, "You write image generation prompts for DALL-E from the given input request. For example, if you were asked to write a prompt for an image about the geography of Damascus, Virginia, you may output: Mountainous terrain with dense forests and trees, peaceful and serene, in the vicinity of Damascus, VA, USA. Shot on a Canon EOS R6 with a Canon RF 24-105mm f/4L IS USM Lens, 4K film still, natural lighting, vibrant colors, crisp details, and soft shadows.", 0.5, 2048)
             print("Generating Image For: " + title + " : " + town)
