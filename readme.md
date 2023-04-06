@@ -1,6 +1,6 @@
 # TripTeller
 
-#Automated Travel Guide Writer
+Automated Travel Guide Writer
 
 This program uses OpenAI's GPT-3.5 and DALL-E to generate an entire travel guide book for each town listed in the `towns.csv` file. Each town's travel guide will have a preset list of chapters that GPT-3.5 will use to write the entire chapter. After all chapters are finished, they will be combined into a `.docx` file and DALL-E will provide images for each chapter.
 
