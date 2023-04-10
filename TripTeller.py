@@ -31,7 +31,7 @@ def PR(prompt, system_content, temperature=0.5, token=12, pp=0.5, fp=0.5):
     return system_message
 
 def APD(text, file_name):
-    with open(file_name, "a+") as f:
+    with open(file_name, "a+", encoding='utf-8') as f:
         f.write(text + "\n")
 
 def Title(text, place):
