@@ -11,11 +11,15 @@ from docx import Document
 from docx.shared import Inches, Pt
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 
+# Change here to set your OpenAI API key, leave to load it from an environment variable
+api_key = None
 
+if api_key is None:
+    # Load your OpenaI API key from an environment variable or secret management service
+    api_key = os.environ.get("api_key")
 
-# Load your API key from an environment variable or secret management service
-openai.api_key = "api_key"
-api_key = os.environ.get("api_key")
+openai.api_key = api_key
+
 url = "https://api.openai.com/v1/images/generations"
 globaldesc=""
 #------------------------------------------------------------------------------------------------------------------------------------------------
@@ -92,7 +96,7 @@ def txt_to_docx(txt_file, docx_file,town):
             heading.alignment = WD_ALIGN_PARAGRAPH.CENTER
             headers = {
                 "Content-Type": "application/json",
-                "Authorization": f"Bearer api_key"
+                "Authorization": f"Bearer {api_key}"
             }
             imgprompt = PR("I want you to write a DALL-E image generation prompt to generate an image related to " + title + " in the town of " + town, "You write image generation prompts for DALL-E from the given input request. For example, if you were asked to write a prompt for an image about the geography of Damascus, Virginia, you may output: Mountainous terrain with dense forests and trees, peaceful and serene, in the vicinity of Damascus, VA, USA. Shot on a Canon EOS R6 with a Canon RF 24-105mm f/4L IS USM Lens, 4K film still, natural lighting, vibrant colors, crisp details, and soft shadows.", 0.5, 2048)
             print("Generating Image For: " + title + " : " + town)
@@ -145,6 +149,8 @@ def read_towns_csv(csv_file):
 
 
 #------------------------------------------------------------------------------------------------------------------------------------------------
+if api_key is None:
+    quit("Please set your OpenAPI key in the code or in the environmenal variable api_key.")
 
 towns = read_towns_csv('towns.csv')
 
