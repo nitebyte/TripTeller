@@ -11,7 +11,8 @@ from docx import Document
 from docx.shared import Inches, Pt
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 
-
+# Change this to your name which will be used in the copyright message
+YOUR_NAME = "Put your name here"
 
 # Load your API key from an environment variable or secret management service
 openai.api_key = "api_key"
@@ -61,7 +62,7 @@ def txt_to_docx(txt_file, docx_file,town):
     # Add copyright page
     copyright_paragraph = document.add_paragraph()
     copyright_paragraph.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    copyright_paragraph.add_run("Copyright 2023 {Your Name}").font.size = Pt(8)
+    copyright_paragraph.add_run(f"Copyright 2023 {YOUR_NAME}").font.size = Pt(8)
 
     # Set the position of the copyright notice to the bottom of the copyright page
     copyright_paragraph_format = copyright_paragraph.paragraph_format
