@@ -22,7 +22,23 @@ globaldesc=""
 
 def PR(prompt, system_content, temperature=0.5, token=12, pp=0.5, fp=0.5):
     messages = [{'role': 'system', 'content': system_content}, {'role': 'user', 'content': prompt}]
-    response = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=messages, temperature=temperature, max_tokens=token, presence_penalty=pp,frequency_penalty=fp)
+
+    retries = 1
+    ok = False
+    
+    while (retries < 3 and ok==False):
+        try:
+            response = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=messages, temperature=temperature, max_tokens=token, presence_penalty=pp,frequency_penalty=fp)
+            ok = True
+        except KeyboardInterrupt:
+            exit("Caught a Control-C, quitting.")
+        except:
+            print(f"OpenAI request failed, retry {retries}.")
+            retries = retries + 1
+
+    if ok == False:
+        exit("Failed to get a response from OpenAI, stopping.")
+        
     system_message = response.choices[0].get('message', {}).get('content', '').strip()
     prompt_message = prompt.strip()
     #print("System message:", system_content)
